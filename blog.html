@@ -9,7 +9,7 @@ title: Jerry Shen's Website
         <h3><a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></h3>
         {{ post.date | date_to_string }}
         <hr>
-        <p>Rerum perspiciatis eligendi id labore quis accusamus. Harum cumque velit enim architecto. Et ut in officia repellendus est. Animi nesciunt vel cum.</p>
+        {{ post.content }}
         <div class='meta'>
           Posted in&nbsp;
           {% for category in post.categories %}

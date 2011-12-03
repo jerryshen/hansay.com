@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
   <meta charset="utf-8">
   <title>Jerry Shen - Jerry Shen's Website</title>
@@ -25,13 +25,14 @@
 <body>
   
   <!-- Topbar ================================================== -->
-  <div class="topbar" data-scrollspy="scrollspy">
+  <div class="topbar">
     <div class="topbar-inner">
       <div class="container">
         <a href="/" class="brand">Jerry Shen's Website</a>
 
         <ul class="nav">
-          <li class="active"><a href="/blog.html">Blog</a></li>
+          <li><a href="/blog.html">Blog</a></li>
+          <li><a href="/about.html">About Me</a></li>
         </ul>
       </div>
     </div>
@@ -39,14 +40,19 @@
   
   <!-- Container ================================================== -->
   <div class="container">
-    <section id="blogentry">
-      <div class='row'>
-  <div class='span11'>
-      <div class='blogentry'>
-        <h3><a href="/2011/12/03/this-is-a-test/" title="This is a test">This is a test</a></h3>
-        03 Dec 2011
-        <hr>
-        <p>I made a mistake when merging branch last week, I forgot to remove a
+    <div class="container-fluid">
+      <div class="sidebar">
+        <div class="box">
+          adasdfasd
+        </div>
+      </div>
+      <div class="content">
+        <div class="box">
+          <div class='blogentry'>
+  <h3><a href="/2011/12/03/this-is-a-test/" title="This is a test">This is a test</a></h3>
+  03 Dec 2011
+  <hr>
+  <p>I made a mistake when merging branch last week, I forgot to remove a
 conflict syntax "&lt;&lt;&lt;&lt;&lt;&lt; HEAD" and push it to remote repository. It
 breaks other one's development. So stupid to make such mistake.</p>
 
@@ -57,15 +63,13 @@ breaks other one's development. So stupid to make such mistake.</p>
 
 <p>It will prevent you from committing conflicts.</p>
 
-        <div class='meta'>
-          Posted in&nbsp;
-          
-          <a href="/categories/git" title="git" rel="category tag" class="btn small">git</a>
-          
-          <a href="/categories/vmware" title="vmware" rel="category tag" class="btn small">vmware</a>
-          
-        </div>
-      </div>
+  <div class='meta'>
+    Posted in&nbsp;
+    
+    <a href="/categories/git" title="git" rel="category tag" class="btn small">git</a>
+    
+    <a href="/categories/vmware" title="vmware" rel="category tag" class="btn small">vmware</a>
+    
   </div>
 </div>
 
@@ -81,7 +85,9 @@ breaks other one's development. So stupid to make such mistake.</p>
 </script>
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
 <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
-    </section>
+        </div>
+      </div>
+    </div>
   </div>
   
   <!-- Footer ================================================== -->

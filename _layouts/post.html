@@ -1,20 +1,16 @@
 ---
 layout: default
 ---
-<div class='row'>
-  <div class='span11'>
-      <div class='blogentry'>
-        <h3><a href="{{ page.url }}" title="{{ page.title }}">{{ page.title }}</a></h3>
-        {{ page.date | date_to_string }}
-        <hr>
-        {{ content }}
-        <div class='meta'>
-          Posted in&nbsp;
-          {% for category in page.categories %}
-          <a href="/categories/{{ category }}" title="{{ category }}" rel="category tag" class="btn small">{{ category }}</a>
-          {% endfor %}
-        </div>
-      </div>
+<div class='blogentry'>
+  <h3><a href="{{ page.url }}" title="{{ page.title }}">{{ page.title }}</a></h3>
+  {{ page.date | date_to_string }}
+  <hr>
+  {{ content }}
+  <div class='meta'>
+    Posted in&nbsp;
+    {% for category in page.categories %}
+    <a href="/categories/{{ category }}" title="{{ category }}" rel="category tag" class="btn small">{{ category }}</a>
+    {% endfor %}
   </div>
 </div>
 

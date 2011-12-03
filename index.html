@@ -1,3 +1,37 @@
 ---
 layout: default
+title: Jerry Shen's Website
 ---
+{% for post in paginator.posts %}
+  <div class='blogentry'>
+    <h3><a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></h3>
+    {{ post.date | date_to_string }}
+    <hr>
+    {{ post.content }}
+    <div class='meta'>
+      Posted in&nbsp;
+      {% for category in post.categories %}
+      <a href="/categories/{{ category }}" title="{{ category }}" rel="category tag" class="btn small">{{ category }}</a>
+      {% endfor %}
+    </div>
+  </div>
+{% endfor %}
+
+<div class="pagination">
+  <ul>
+      {% if paginator.previous_page %}
+        <li class="prev disabled">
+          {% if paginator.previous_page == 1 %}
+          <a href="/blog.html" title="Previous Page">&laquo; Previous</a>
+          {% else %}
+          <a href="/page{{ paginator.previous_page }}/" title="Previous Page">&laquo; Previous</a>
+          {% endif %}
+        </li>
+      {% endif %}
+      {% if paginator.next_page %}
+        <li class="next">
+          <a href="/page{{ paginator.next_page }}/" title="Next Page">Next &raquo;</a>
+        <li>
+      {% endif %}
+  </ul>
+</div>
