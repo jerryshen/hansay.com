@@ -320,6 +320,7 @@ pre.prettyprint {
 html {
 /*  background: url("/images/bg2.jpg") repeat scroll left bottom #EEEEEE;*/
   background-color: #EEEEEE;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.024) inset;
   display: table;
   height: 100%;
   width: 100%;
@@ -345,4 +346,14 @@ body {
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
   margin: 0 0 20px;
   padding: 10px;
+  overflow: hidden;
+}
+.box .left {
+  float: left;
+}
+.box .right {
+  float: right;
+}
+.sidebar .box hr {
+  margin-bottom: 5px;
 }
