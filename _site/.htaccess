@@ -1,0 +1,7 @@
+Options -Indexes
+
+RewriteEngine On
+
+RewriteBase /
+RewriteCond %{HTTP_HOST} ^hansay.com [NC]
+RewriteRule ^(.*)$ http://www.hansay.com/$1 [L,R=301]

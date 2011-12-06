@@ -42,7 +42,7 @@
   <div class="container">
     <div class="container-fluid">
       <div class="sidebar">
-        <div class="box">
+        <div id="subscribe" class="box">
           <h5 class="left">Subscribe</h5>
           <a href="#" class="right"><img src="/images/rss.png" alt="rss feed" /></a>
           <br/>
@@ -52,14 +52,26 @@
           </div>
         </div>
         
-        <div class="box">
+        <div id="categories" class="box">
           <h5>Categories</h5>
           <hr>
-          {% for category in site.categories %}
+          <ul class="pills">
+            {% for category in site.categories %}
+              <li><a href="/categories/{{category | first}}">{{category | first}} ({{category | last | size }})</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+        
+        <div id="archives" class="box">
+          <h5>Archives</h5>
+          <hr>
+          <ul>
+            <h2>Archives</h2>
             
-          {% endfor %}
+          </ul>
         </div>
       </div>
+      
       <div class="content">
         <div class="box">
           {{ content }}

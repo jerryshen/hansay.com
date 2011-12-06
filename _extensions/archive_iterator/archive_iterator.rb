@@ -18,4 +18,3 @@ module Jekyll
     result
   end
 end
-
