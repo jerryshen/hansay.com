@@ -365,3 +365,6 @@ body {
 .sidebar #categories.box hr, .sidebar #archives.box hr {
   margin-top: 5px;
 }
+.box .row {
+  margin-left: 5px;
+}
