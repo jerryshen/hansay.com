@@ -1,0 +1,4 @@
+_site/*
+config/deploy.rb
+Capfile
+.rvmrc
