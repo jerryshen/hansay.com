@@ -381,6 +381,10 @@ ul.social-grid a {
   border: 0;
 }
 
-/*.blogentry .meta {
-  float: right;
-}*/
+.blogentry h3 a, ul li a {
+  color: #00438a;
+}
+
+.blogentry h3 a:hover, ul li a:hover {
+  color: #0069D6;
+}
