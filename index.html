@@ -3,18 +3,26 @@ layout: default
 title: Jerry Shen's Website
 ---
 {% for post in paginator.posts %}
+<div class="box">
   <div class='blogentry'>
-    <h3><a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></h3>
-    {{ post.date | date_to_string }}
+    <h2><a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></h2>
     <hr>
     {{ post.content }}
     <div class='meta'>
-      Posted in&nbsp;
+      <ul class="pills">
       {% for category in post.categories %}
-      <a href="/categories/{{ category }}" title="{{ category }}" rel="category tag" class="btn small">{{ category }}</a>
+      <li>
+        <a href="/categories/{{ category }}" title="{{ category }}" rel="category tag">{{ category }}</a>
+      </li>
       {% endfor %}
+      </ul>
+      <p class="date">Posted at {{ post.date | date_to_string }}</p>
+      <p class="comments-link">
+        <a href='{{post.url}}#disqus_thread'>Comments</a>
+      </p>
     </div>
   </div>
+</div>
 {% endfor %}
 
 <div class="pagination">

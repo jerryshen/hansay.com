@@ -358,7 +358,7 @@ body {
 .sidebar .box hr {
   margin-bottom: 5px;
 }
-.sidebar .pills a {
+.sidebar .pills a, .meta .pills a {
   background-color: #0069D6;
   color: #FFFFFF;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
@@ -387,4 +387,36 @@ ul.social-grid a {
 
 .blogentry h3 a:hover, ul li a:hover {
   color: #0069D6;
+}
+p {
+  margin-bottom: 15px;
+}
+
+.blogentry {
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  margin-bottom: 17px;
+}
+
+p.comments-link {
+  float: right;
+  margin-top: -32px;
+  margin-right: 10px;
+}
+
+p.date {
+  margin-bottom: 15px;
+  margin-left: 10px;
+}
+
+.blogentry hr {
+  margin-top: 16px;
+}
+
+.blogentry h2 a {
+  color: black;
+}
+
+.weibo {
+  margin-left: 10px;
+  margin-top: 15px;
 }

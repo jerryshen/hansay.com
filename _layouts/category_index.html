@@ -1,35 +1,37 @@
 ---
 layout: default
 ---
-<div class="page-header">
-  <h3>
-    <small>
-      Category Archives:
-      <a href="/categories/{{page.category}}">{{page.category}}</a>
-    </small>
-  </h3>
-</div>
+<div class="box">
+  <div class="page-header">
+    <h3>
+      <small>
+        Category Archives:
+        <a href="/categories/{{page.category}}">{{page.category}}</a>
+      </small>
+    </h3>
+  </div>
 
-<div class='row'>
-  <div class='span11'>
+  <div class='row'>
     {% for post in site.categories[page.category] %}
-      <div class='blogentry'>
-        <h3><a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></h3>
-        <div class='meta-category'>
-          Posted in&nbsp;
+    <div class='blogentry'>
+      <h3><a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></h3>
+      <div class='meta'>
+        <ul class="pills">
           {% for category in post.categories %}
-          <a href="/categories/{{ category }}" title="{{ category }}" rel="category tag" class="btn small">{{ category }}</a>
+          <li>
+            <a href="/categories/{{ category }}" title="{{ category }}" rel="category tag">{{ category }}</a>
+          </li>
           {% endfor %}
-          
-           <a href='{{post.url}}#disqus_thread'>Comments</a>
-        </div>
-        
-        <div class="meta-comment">
-          {{ post.date | date_to_string }}
-        </div>
-        <hr>
-        
+        </ul>
+
+        <p class="date">Posted at {{ post.date | date_to_string }}</p>
+        <p class="comments-link">
+          <a href='{{post.url}}#disqus_thread'>Comments</a>
+        </p>
       </div>
+      <hr>
+
+    </div>
     {% endfor %}
   </div>
 </div>
