@@ -1,0 +1,35 @@
+---
+layout: default
+---
+<div class="page-header">
+  <h3>
+    <small>
+      Category Archives:
+      <a href="/categories/{{page.category}}">{{page.category}}</a>
+    </small>
+  </h3>
+</div>
+
+<div class='row'>
+  <div class='span11'>
+    {% for post in site.categories[page.category] %}
+      <div class='blogentry'>
+        <h3><a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></h3>
+        <div class='meta-category'>
+          Posted in&nbsp;
+          {% for category in post.categories %}
+          <a href="/categories/{{ category }}" title="{{ category }}" rel="category tag" class="btn small">{{ category }}</a>
+          {% endfor %}
+          
+           <a href='{{post.url}}#disqus_thread'>Comments</a>
+        </div>
+        
+        <div class="meta-comment">
+          {{ post.date | date_to_string }}
+        </div>
+        <hr>
+        
+      </div>
+    {% endfor %}
+  </div>
+</div>

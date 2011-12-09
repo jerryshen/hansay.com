@@ -334,11 +334,12 @@ body {
 }
 .container-fluid > .content {
   margin-left: -23px;
-  margin-right: 216px;
+  margin-right: 316px;
 }
 .container-fluid > .sidebar {
   position: relative;
   float: right;
+  width: 320px;
 }
 .box {
   background-color: #FFFFFF;
@@ -362,9 +363,24 @@ body {
   color: #FFFFFF;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
 }
-.sidebar #categories.box hr, .sidebar #archives.box hr {
+.sidebar #categories.box hr, .sidebar #archives.box hr, .sidebar #recent_posts.box hr {
   margin-top: 5px;
 }
 .box .row {
   margin-left: 5px;
 }
+ul.social-grid {
+  margin-bottom: 0;
+  margin-left: 5px;
+}
+ul.social-grid li {
+  display: inline;
+  margin-left: 5px;
+}
+ul.social-grid a {
+  border: 0;
+}
+
+/*.blogentry .meta {
+  float: right;
+}*/
