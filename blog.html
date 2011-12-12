@@ -2,27 +2,26 @@
 layout: default
 title: Jerry Shen's Website
 ---
-<div class='row'>
+<div class="box">
   {% for post in site.posts %}
-  <div class="box">
-    <div class='blogentry'>
-      <h2><a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></h2>
-      <hr>
-      {{ post.content }}
-      <div class='meta'>
-        <ul class="pills">
-          {% for category in post.categories %}
-          <li>
-            <a href="/categories/{{ category }}" title="{{ category }}" rel="category tag">{{ category }}</a>
-          </li>
-          {% endfor %}
-        </ul>
-        <p class="date">Posted at {{ post.date | date_to_string }}</p>
-        <p class="comments-link">
-          <a href='{{post.url}}#disqus_thread'>Comments</a>
-        </p>
-      </div>
+  <div class='blogentry'>
+    <h3><a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></h3>
+    <div class='meta'>
+      <ul class="pills">
+        {% for category in post.categories %}
+        <li>
+          <a href="/categories/{{ category }}" title="{{ category }}" rel="category tag">{{ category }}</a>
+        </li>
+        {% endfor %}
+      </ul>
+
+      <p class="comments-link">
+        <a href='{{post.url}}#disqus_thread'>Comments</a>
+      </p>
+      <p class="date">Posted at {{ post.date | date_to_string }}</p>
     </div>
   </div>
+  <hr>
   {% endfor %}
 </div>
+

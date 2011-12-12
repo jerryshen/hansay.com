@@ -12,29 +12,28 @@ layout: default
 
   <div class='row'>
     {% for d in (1..31) reversed %}
-    {% if site.collated_posts[page.year][page.month][d] %}
-    {% for post in site.collated_posts[page.year][page.month][d] reversed %}
-    <div class='blogentry'>
-      <h3><a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></h3>
-      <div class='meta'>
-        <ul class="pills">
-          {% for category in post.categories %}
-          <li>
-            <a href="/categories/{{ category }}" title="{{ category }}" rel="category tag">{{ category }}</a>
-          </li>
-          {% endfor %}
-        </ul>
+      {% if site.collated_posts[page.year][page.month][d] %}
+        {% for post in site.collated_posts[page.year][page.month][d] reversed %}
+          <div class='blogentry'>
+            <h3><a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></h3>
+            <div class='meta'>
+              <ul class="pills">
+                {% for category in post.categories %}
+                <li>
+                  <a href="/categories/{{ category }}" title="{{ category }}" rel="category tag">{{ category }}</a>
+                </li>
+                {% endfor %}
+              </ul>
 
-        <p class="date">Posted at {{ post.date | date_to_string }}</p>
-        <p class="comments-link">
-          <a href='{{post.url}}#disqus_thread'>Comments</a>
-        </p>
-      </div>
-      <hr>
-
-    </div>
-    {% endfor %}
-    {% endif %}
+              <p class="comments-link">
+                <a href='{{post.url}}#disqus_thread'>Comments</a>
+              </p>
+              <p class="date">Posted at {{ post.date | date_to_string }}</p>
+            </div>
+          </div>
+          <hr>
+        {% endfor %}
+      {% endif %}
     {% endfor %}
   </div>
 </div>
