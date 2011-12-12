@@ -366,59 +366,46 @@ Programming Language" 和 "Programming Ruby" 所推荐的.
     end
 {% endhighlight %}
 
-    While several Ruby books suggest the first style, the second is much more prominent
-    in practice (and arguably a bit more readable).
+> 一些Ruby书籍上也建议过用第一种形式, 但是第二种我觉得更加易读.
 
-* Avoid line continuation (\\) where not required. In practice, avoid using
-  line continuations at all.
+* 尽量避免使用 `\` 来换行续写代码.
 
-    ```Ruby
+{% highlight ruby %}
     # bad
     result = 1 - \
              2
 
-    # good (but still ugly as hell)
+    # good (但是还很丑)
     result = 1 \
              - 2
-    ```
+{% endhighlight %}
 
-* Using the return value of `=` (an assignment) is ok.
+* 常用 `||=` 来初始化变量.
 
-    ```Ruby
-    if v = array.grep(/foo/) ...
-    ```
-
-* Use `||=` freely to initialize variables.
-
-    ```Ruby
+{% highlight ruby %}
     # set name to Bozhidar, only if it's nil or false
     name ||= 'Bozhidar'
-    ```
+{% endhighlight %}
 
-* Don't use `||=` to initialize boolean variables. (Consider what
-would happen if the current value happened to be `false`.)
+* 初始化布尔类型变量的时候不要用 `||=`
 
-    ```Ruby
+{% highlight ruby %}
     # bad - would set enabled to true even if it was false
     enabled ||= true
 
     # good
     enabled = true if enabled.nil?
-    ```
+{% endhighlight %}
 
-* Avoid using Perl-style special variables (like `$0-9`, `$``,
-  etc. ). They are quite cryptic and their use in anything but
-  one-liner scripts is discouraged.
+* 碰到括号, 方法和括号之间不要加空格.
 
-* Never put a space between a method name and the opening parenthesis.
-
-    ```Ruby
+{% highlight ruby %}
     # bad
     f (3 + 2) + 1
 
     # good
     f(3 + 2) + 1
-    ```
+{% endhighlight %}
 
 * If the first argument to a method begins with an open parenthesis,
   always use parentheses in the method invocation. For example, write
