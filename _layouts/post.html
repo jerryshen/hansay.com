@@ -1,6 +1,7 @@
 ---
 layout: default
 ---
+
 <div class="box">
   <div class='blogentry'>
     <h2><a href="{{ page.url }}" title="{{ page.title }}">{{ page.title }}</a></h2>
@@ -8,29 +9,26 @@ layout: default
     {{ content }}
     <div class='meta'>
       <ul class="pills">
-        {% for category in page.categories %}
-        <li>
-          <a href="/categories/{{ category }}" title="{{ category }}" rel="category tag">{{ category }}</a>
-        </li>
-        {% endfor %}
+      {% for category in page.categories %}
+      <li>
+        <a href="/categories/{{ category }}" title="{{ category }}" rel="category tag">{{ category }}</a>
+      </li>
+      {% endfor %}
       </ul>
       <p class="date">Posted at {{ page.date | date_to_string }}</p>
       <p class="comments-link">
-        <a href='{{page.url}}#disqus_thread'>Comments</a>
+        <a href='{{post.url}}#disqus_thread'>Comments</a>
       </p>
     </div>
   </div>
+  
+</div>
 
+<div class="box">
   <div id="disqus_thread"></div>
 </div>
 
 <script type="text/javascript">
-var disqus_title = 'Hello world!'; 
-</script>
-
-<script type="text/javascript">
-var disqus_developer = 1; // developer mode is on
-
 var disqus_shortname = 'jerryshen';
 
 (function() {

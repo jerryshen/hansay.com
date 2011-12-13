@@ -434,6 +434,11 @@ p.date {
   margin-top: 10px;
 }
 
+h1 {
+  font-size: 24px;
+  line-height: 24px;
+}
+
 /* hightlight*/
 code {
   padding: 0;

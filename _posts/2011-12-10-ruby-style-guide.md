@@ -5,24 +5,40 @@ categories:
 - ruby
 ---
 
-### 前奏
+# Prelude
 
->  Ruby作为一种敏捷开发语言, 真的很难去规范每个人的编程风格, 但是好的风格对整个项目和协作开发都会起到很好的作用  
->  好的代码风格是区分好和非常好的评判标准  
->  -- Jerry Shen
+> This guide is copy from [bbatsov][5]'s work.
+> Style is what separates the good from the great. <br/>
+> -- Bozhidar Batsov
 
-作为一个从事Ruby开发将近4年的developer来说, 我们基本是没有一种比较官方的代码规范的指南, 文档或者最佳实践, 不像Python, 它拥有一个
-很棒的编程规范参考[PEP-8][0]. 但我一直相信在开发项目的时候, 特别是多人协作, 代码风格至关重要, 我同时也相信作为Ruby开发者的我们
-能够创作出一种比较好的风格体系.
+One thing has always bothered me as Ruby developer - Python developers
+have a great programming style reference
+([PEP-8][0]) and we never got
+an official guide, documenting Ruby coding style and best
+practices. And I do believe that style matters. I also believe that
+such fine fellows, like us Ruby developers, should be quite capable to
+produce this coveted document.
 
-很多人问过我写起Ruby代码来太自由了, 导致多人协作开发的时候, 在没有文档的情况下很难去读别人的代码. 我是一个极力推荐每个项目spec测试覆盖率要超过90%的人,
-面对这种问题, 我会很无奈, 但确实有时候并不是所有的人都能像自己想象的那样, 这也是我翻译并修改了这篇规范的原因.
+This guide started its life as our internal company Ruby coding guidelines
+(written by yours truly). At some point I decided that the work I was
+doing might be interesting to members of the Ruby community in general
+and that the world had little need for another internal company
+guideline. But the world could certainly benefit from a
+community-driven and community-sanctioned set of practices, idioms and
+style prescriptions for Ruby programming.
 
-顺带一句, 如果你还想深入了解Rails代码风格, 可以参考[Ruby on Rails 3 代码规范][1]
+Since the inception of the guide I've received a lot of feedback from
+members of the exceptional Ruby community around the world. Thanks for
+all the suggestions and the support! Together we can make a resource
+beneficial to each and every Ruby developer out there.
 
-### 规范内容
+By the way, if you're into Rails you might want to check out the
+complementary
+[Ruby on Rails 3 Style Guide][1].
 
-* [Ruby编程风格指南](#guide)
+## Table of Contents
+
+* [The Ruby Style Guide](#guide)
     * [Source Code Layout](#layout)
     * [Syntax](#syntax)
     * [Naming](#naming)
@@ -38,18 +54,43 @@ categories:
 * [Contributing](#contributing)
 * [Spread the word](#spreadtheword)
 
-### Ruby 代码规范
+# The Ruby Style Guide
 
-这篇代码规范指南的初衷就是为了Ruby程序员之间的代码互通, 可以很好的协作开发项目, 本指南被拆分成多个相关联的规范, 我并没有把这些规范做的很完善,
-这些大多是我作为一个专业Ruby工程师平时的积累, 朋友的建议还有一些书籍, 比如 [Programming Ruby 1.9][2] 和
-[The Ruby Programming Language][3], 这篇指南将会一直会处于完善阶段.
+This Ruby style guide recommends best practices so that real-world Ruby
+programmers can write code that can be maintained by other real-world Ruby
+programmers. A style guide that reflects real-world usage gets used, and a
+style guide that holds to an ideal that has been rejected by the people it is
+supposed to help risks not getting used at all &ndash; no matter how good it is.
 
-你可以使用 [Transmuter][4] 为这篇指南生成一个pdf或者html备份
+The guide is separated into several sections of related rules. I've
+tried to add the rationale behind the rules (if it's omitted I've
+assumed that is pretty obvious).
 
+I didn't come up with all the rules out of nowhere - they are mostly
+based on my extensive career as a professional software engineer,
+feedback and suggestions from members of the Ruby community and
+various highly regarded Ruby programming resources, such as
+["Programming Ruby 1.9"][2]
+and ["The Ruby Programming Language"][3].
+
+The guide is still a work in progress - some rules are lacking
+examples, some rules don't have examples that illustrate them clearly
+enough. In due time these issues will be addressed - just keep them in
+mind for now.
+
+You can generate a PDF or an HTML copy of this guide using
+[Transmuter](https://github.com/TechnoGate/transmuter).
+
+<a name="layout"></a>
 ## Source Code Layout
 
-* 任何时候文件编码都要使用 `UTF-8`
-* 代码的换行都使用 **两个空格**, 或者将一个 **tab** 设置成 **两个空格** 来用
+> Nearly everybody is convinced that every style but their own is
+> ugly and unreadable. Leave out the "but their own" and they're
+> probably right... <br/>
+> -- Jerry Coffin (on indentation)
+
+* Use `UTF-8` as the source file encoding.
+* Use two **spaces** per indentation level.
 
 {% highlight ruby %}
     # good
@@ -63,10 +104,17 @@ categories:
     end
 {% endhighlight %}
 
-* 碰到 `+` 号, `:` 号, `;` 号还有 `{ }` 前后, 都要加上空格, 
+
+* Use Unix-style line endings. (*BSD/Solaris/Linux/OSX users are covered by default,
+  Windows users have to be extra careful.)
+    * If you're using Git you might want to add the following
+    configuration setting to protect your project from Windows line
+    endings creeping in: `$ git config --global core.autocrlf true`
 
 * Use spaces around operators, after commas, colons and semicolons, around `{`
-  and before `}`. 空格可能对你来说无关紧要, 但是确实让代码编码变得更加容易读.
+  and before `}`. Whitespace might be (mostly) irrelevant to the Ruby
+  interpreter, but its proper use is the key to writing easily
+  readable code.
 
 {% highlight ruby %}
     sum = 1 + 2
@@ -75,7 +123,7 @@ categories:
     [1, 2, 3].each { |e| puts e }
 {% endhighlight %}
 
-唯一的一个例外就是当我们在用指数运算符的时候:
+    The only exception is when using the exponent operator:
 
 {% highlight ruby %}
     # bad
@@ -85,15 +133,16 @@ categories:
     e = M * c**2
 {% endhighlight %}
 
-* 在 `(`, `[` 后, `]`, `)` 前, 都不要加空格.
+* No spaces after `(`, `[` or before `]`, `)`.
 
 {% highlight ruby %}
     some(arg).other
     [1, 2, 3].length
 {% endhighlight %}
 
-* 如果判断的条件过多, 请用 `case when` 语句, 可能有些人不同意这一点, 但这确实是 "The Ruby
-Programming Language" 和 "Programming Ruby" 所推荐的.
+* Indent `when` as deep as `case`. I know that many would disagree
+  with this one, but it's the style established in both the "The Ruby
+  Programming Language" and "Programming Ruby".
 
 {% highlight ruby %}
     case
@@ -117,7 +166,8 @@ Programming Language" 和 "Programming Ruby" 所推荐的.
            end
 {% endhighlight %}
 
-* 每个方法间需要空一行, 这样看上去更加清爽.
+* Use empty lines between `def`s and to break up a method into logical
+  paragraphs.
 
 {% highlight ruby %}
     def some_method
@@ -138,22 +188,27 @@ Programming Language" 和 "Programming Ruby" 所推荐的.
 * Keep lines fewer than 80 characters.
 * Avoid trailing whitespace.
 
-<a name="syntax" /></a>
-### Syntax
+<a name="syntax"/></a>
+## Syntax
 
-* 如果一个方法中需要传入参数, 那么 `def` 后使用括号 `()`, 如果没有参数, 则不需要加括号.
+* Use `def` with parentheses when there are arguments. Omit the
+  parentheses when the method doesn't accept any arguments.
 
 {% highlight ruby %}
-     def some_method
-       # body omitted
-     end
+   def some_method
+     # body omitted
+   end
 
-     def some_method_with_arguments(arg1, arg2)
-       # body omitted
-     end
+   def some_method_with_arguments(arg1, arg2)
+     # body omitted
+   end
 {% endhighlight %}
 
-* 尽量避免使用 `for` 循环, 用迭代器替代. 从另外一方面说, `for` 其实是用 `each` 来实现的, 没必要再多加一层.
+* Never use `for`, unless you know exactly why. Most of the time iterators
+  should be used instead. `for` is implemented in terms of `each` (so
+  you're adding a level of indirection), but with a twist - `for`
+  doesn't introduce a new scope (unlike `each`) and variables defined
+  in its block will be visible outside it.
 
 {% highlight ruby %}
     arr = [1, 2, 3]
@@ -167,7 +222,7 @@ Programming Language" 和 "Programming Ruby" 所推荐的.
     arr.each { |elem| puts elem }
 {% endhighlight %}
 
-* 在 `if/unless` 后尽量避免使用 `then`.
+* Never use `then` for multi-line `if/unless`.
 
 {% highlight ruby %}
     # bad
@@ -181,21 +236,20 @@ Programming Language" 和 "Programming Ruby" 所推荐的.
     end
 {% endhighlight %}
 
-* 可以使用三元运算 `?:` 来替代 `if/else` 语句, 这样使得代码更加简洁.
+* Favor the ternary operator(`?:`) over `if/then/else/end` constructs.
+  It's more common and obviously more concise.
 
 {% highlight ruby %}
     # bad
-    result = if some_condition
-                something
-              else
-                something_else
-              end
+    result = if some_condition then something else something_else end
 
     # good
     result = some_condition ? something : something_else
 {% endhighlight %}
-  
-* 不要嵌套三元运算, 会让逻辑变的难读, 其中可以用 `if/else` 来替代
+
+* Use one expression per branch in a ternary operator. This
+  also means that ternary operators must not be nested. Prefer
+  `if/else` constructs in these cases.
 
 {% highlight ruby %}
     # bad
@@ -208,8 +262,9 @@ Programming Language" 和 "Programming Ruby" 所推荐的.
       something_else
     end
 {% endhighlight %}
-  
-* 避免使用 `if x: ...`, 请用三元运算代替, 因为这种用法在 Ruby 1.9 中移除了
+
+* Never use `if x: ...` - it is removed in Ruby 1.9. Use
+  the ternary operator instead.
 
 {% highlight ruby %}
     # bad
@@ -219,13 +274,16 @@ Programming Language" 和 "Programming Ruby" 所推荐的.
     result = some_condition ? something : something_else
 {% endhighlight %}
 
-* 使用三元运算代替 `if x; ...` 的写法.
+* Never use `if x; ...`. Use the ternary operator instead.
 
-* 如果判断的条件只有一个, 请用 `when x then ...` 来表式, `when x: ...` 这种写法在 Ruby 1.9 中移除了
+* Use `when x then ...` for one-line cases. The alternative syntax
+  `when x: ...` is removed in Ruby 1.9.
 
-* 避免使用 `when x; ...`, 请看上一条规范.
+* Never use `when x; ...`. See the previous rule.
 
-* 布尔类型表达式使用 `&&/||`, 逻辑流程中使用 `and/or`.
+* Use `&&/||` for boolean expressions, `and/or` for control flow.  (Rule
+  of thumb: If you have to use outer parentheses, you are using the
+  wrong operators.)
 
 {% highlight ruby %}
     # boolean expression
@@ -237,7 +295,10 @@ Programming Language" 和 "Programming Ruby" 所推荐的.
     document.saved? or document.save!
 {% endhighlight %}
 
-* 如果 `if/unless` 条件中只有一行代码, 可以直接使用 `xxx if condition`.
+* Avoid multi-line `?:` (the ternary operator), use `if/unless` instead.
+
+* Favor modifier `if/unless` usage when you have a single-line
+  body. Another good alternative is the usage of control flow `and/or`.
 
 {% highlight ruby %}
     # bad
@@ -252,12 +313,13 @@ Programming Language" 和 "Programming Ruby" 所推荐的.
     some_condition and do_something
 {% endhighlight %}
 
-* 代码中尽量使用 `unless` 来代替 `if !xxx`.
+* Favor `unless` over `if` for negative conditions (or control
+  flow `or`).
 
 {% highlight ruby %}
     # bad
     do_something if !some_condition
-    
+
     # good
     do_something unless some_condition
 
@@ -265,7 +327,7 @@ Programming Language" 和 "Programming Ruby" 所推荐的.
     some_condition or do_something
 {% endhighlight %}
 
-* 尽量不要用 `unless ... else ...` 这种写法, 请换成 `if ... else ...`
+* Never use `unless` with `else`. Rewrite these with the positive case first.
 
 {% highlight ruby %}
     # bad
@@ -283,7 +345,7 @@ Programming Language" 和 "Programming Ruby" 所推荐的.
     end
 {% endhighlight %}
 
-* 在 `if/unless/while` 的条件中不要使用 `()`
+* Don't use parentheses around the condition of an `if/unless/while`.
 
 {% highlight ruby %}
     # bad
@@ -297,8 +359,11 @@ Programming Language" 和 "Programming Ruby" 所推荐的.
     end
 {% endhighlight %}
 
-* DSL(e.g. Rake, Rails, RSpec) 中的内部方法参数不要使用括号 `()`, 比如 `attr_reader`, `puts` 和 attribute access 等方法.
-  当调用某些方法的时候需要用括号 `()`.
+* Omit parentheses around parameters for methods that are part of an
+  internal DSL (e.g. Rake, Rails, RSpec), methods that are with
+  "keyword" status in Ruby (e.g. `attr_reader`, `puts`) and attribute
+  access methods. Use parentheses around the arguments of all other
+  method invocations.
 
 {% highlight ruby %}
     class Person
@@ -316,7 +381,11 @@ Programming Language" 和 "Programming Ruby" 所推荐的.
     array.delete(e)
 {% endhighlight %}
 
-* 单行的blocks用 `{...}` 替代 `do...end`用法, 多行的blocks用 `do...end` 替代 `{...}`
+* Prefer `{...}` over `do...end` for single-line blocks.  Avoid using
+  `{...}` for multi-line blocks (multiline chaining is always
+  ugly). Always use `do...end` for "control flow" and "method
+  definitions" (e.g. in Rakefiles and certain DSLs).  Avoid `do...end`
+  when chaining.
 
 {% highlight ruby %}
     names = ["Bozhidar", "Steve", "Sarah"]
@@ -338,7 +407,11 @@ Programming Language" 和 "Programming Ruby" 所推荐的.
     end.map { |name| name.upcase }
 {% endhighlight %}
 
-* 避免使用 `return`
+    Some will argue that multiline chaining would look OK with the use of {...}, but they should
+    ask themselves - it this code really readable and can't the blocks contents be extracted into
+    nifty methods.
+
+* Avoid `return` where not required.
 
 {% highlight ruby %}
     # bad
@@ -352,7 +425,7 @@ Programming Language" 和 "Programming Ruby" 所推荐的.
     end
 {% endhighlight %}
 
-* 当方法中指定参数的默认值时, `=` 号前后用空格空开
+* Use spaces around the `=` operator when assigning default values to method parameters:
 
 {% highlight ruby %}
     # bad
@@ -366,28 +439,37 @@ Programming Language" 和 "Programming Ruby" 所推荐的.
     end
 {% endhighlight %}
 
-> 一些Ruby书籍上也建议过用第一种形式, 但是第二种我觉得更加易读.
+    While several Ruby books suggest the first style, the second is much more prominent
+    in practice (and arguably a bit more readable).
 
-* 尽量避免使用 `\` 来换行续写代码.
+* Avoid line continuation (\\) where not required. In practice, avoid using
+  line continuations at all.
 
 {% highlight ruby %}
     # bad
     result = 1 - \
              2
 
-    # good (但是还很丑)
+    # good (but still ugly as hell)
     result = 1 \
              - 2
 {% endhighlight %}
 
-* 常用 `||=` 来初始化变量.
+* Using the return value of `=` (an assignment) is ok.
+
+{% highlight ruby %}
+    if v = array.grep(/foo/) ...
+{% endhighlight %}
+
+* Use `||=` freely to initialize variables.
 
 {% highlight ruby %}
     # set name to Bozhidar, only if it's nil or false
     name ||= 'Bozhidar'
 {% endhighlight %}
 
-* 初始化布尔类型变量的时候不要用 `||=`
+* Don't use `||=` to initialize boolean variables. (Consider what
+would happen if the current value happened to be `false`.)
 
 {% highlight ruby %}
     # bad - would set enabled to true even if it was false
@@ -397,7 +479,11 @@ Programming Language" 和 "Programming Ruby" 所推荐的.
     enabled = true if enabled.nil?
 {% endhighlight %}
 
-* 碰到括号, 方法和括号之间不要加空格.
+* Avoid using Perl-style special variables (like `$0-9`, `$``,
+  etc. ). They are quite cryptic and their use in anything but
+  one-liner scripts is discouraged.
+
+* Never put a space between a method name and the opening parenthesis.
 
 {% highlight ruby %}
     # bad
@@ -414,7 +500,7 @@ Programming Language" 和 "Programming Ruby" 所推荐的.
 * Always run the Ruby interpreter with the `-w` option so it will warn
   you if you forget either of the rules above!
 
-<a name="naming"/>
+<a name="naming"/></a>
 ## Naming
 
 > The only real difficulties in programming are cache invalidation and
@@ -434,17 +520,17 @@ Programming Language" 和 "Programming Ruby" 所推荐的.
   (accumulator, element).
 * When defining binary operators, name the argument `other`.
 
-    ```Ruby
+{% highlight ruby %}
     def +(other)
       # body omitted
     end
-    ```
+{% endhighlight %}
 
 * Prefer `map` over *collect*, `find` over *detect*, `select` over
   *find_all*, `size` over *length*. This is not a hard requirement; if the
   use of the alias enhances readability, it's ok to use it.
 
-<a name="comments"/>
+<a name="comments"/></a>
 ## Comments
 
 > Good code is its own best documentation. As you're about to add a
@@ -458,10 +544,10 @@ Programming Language" 和 "Programming Ruby" 所推荐的.
   space](http://en.wikipedia.org/wiki/Sentence_spacing) after periods.
 * Avoid superfluous comments.
 
-    ```Ruby
+{% highlight ruby %}
     # bad
     counter += 1 # increments counter by one
-    ```
+{% endhighlight %}
 
 * Keep existing comments up-to-date. No comment is better than an outdated
   comment.
@@ -478,23 +564,23 @@ Programming Language" 和 "Programming Ruby" 所推荐的.
 * If multiple lines are required to describe the problem, subsequent
   lines should be indented two spaces after the `#`.
 
-    ```Ruby
+{% highlight ruby %}
     def bar
       # FIXME: This has crashed occasionally since v3.2.1. It may
       #   be related to the BarBazUtil upgrade.
       baz(:quux)
     end
-    ```
+{% endhighlight %}
 
 * In cases where the problem is so obvious that any documentation would
   be redundant, annotations may be left at the end of the offending line
   with no note. This usage should be the exception and not the rule.
 
-    ```Ruby
+{% highlight ruby %}
     def bar
       sleep 100 # OPTIMIZE
     end
-    ```
+{% endhighlight %}
 
 * Use `TODO` to note missing features or functionality that should be
   added at a later date.
@@ -514,7 +600,7 @@ Programming Language" 和 "Programming Ruby" 所推荐的.
 
 * Always supply a proper `to_s` method.
 
-    ```Ruby
+{% highlight ruby %}
     class Person
       attr_reader :first_name, :last_name
 
@@ -527,7 +613,7 @@ Programming Language" 和 "Programming Ruby" 所推荐的.
         "#@first_name #@last_name"
       end
     end
-    ```
+{% endhighlight %}
 
 * Use the `attr` family of functions to define trivial accessors or
   mutators.
@@ -543,7 +629,7 @@ in *Ruby* now, not in *Python*.
 * Indent the `public`, `protected`, and `private` methods as much the
   method definitions they apply to. Leave one blank line above them.
 
-    ```Ruby
+{% highlight ruby %}
     class SomeClass
       def public_method
         # ...
@@ -554,11 +640,12 @@ in *Ruby* now, not in *Python*.
         # ...
       end
     end
+{% endhighlight %}
 
 * Use `def self.method` to define singleton methods. This makes the methods
   more resistant to refactoring changes.
 
-    ```Ruby
+{% highlight ruby %}
     class TestClass
       # bad
       def TestClass.some_method
@@ -582,16 +669,16 @@ in *Ruby* now, not in *Python*.
         end
       end
     end
-    ```
+{% endhighlight %}
 
-<a name="exceptions"/>
+<a name="exceptions"/></a>
 ## Exceptions
 
 * Don't suppress exceptions.
 * Don't use exceptions for flow of control.
 * Avoid rescuing the `Exception` class.
 
-<a name="collections"/>
+<a name="collections"/></a>
 ## Collections
 
 * It's ok to use arrays as sets for a small number of elements.
@@ -610,29 +697,29 @@ strings.
 
 * Prefer string interpolation instead of string concatenation:
 
-    ```Ruby
+{% highlight ruby %}
     # bad
     email_with_name = user.name + ' <' + user.email + '>'
 
     # good
     email_with_name = "#{user.name} <#{user.email}>"
-    ```
+{% endhighlight %}
 
 * Prefer single-quoted strings when you don't need string interpolation or
   special symbols such as `\t`, `\n`, `'`, etc.
 
-    ```Ruby
+{% highlight ruby %}
     # bad
     name = "Bozhidar"
 
     # good
     name = 'Bozhidar'
-    ```
+{% endhighlight %}
 
 * Don't use `{}` around instance variables being interpolated into a
   string.
 
-    ```Ruby
+{% highlight ruby %}
     class Person
       attr_reader :first_name, :last_name
 
@@ -651,13 +738,13 @@ strings.
         "#@first_name #@last_name"
       end
     end
-    ```
+{% endhighlight %}
 
 * Avoid using `String#+` when you need to construct large data chunks.
   Instead, use `String#<<`. Concatenation mutates the string instance in-place
   and is always faster than `String#+`, which creates a bunch of new string objects.
 
-    ```Ruby
+{% highlight ruby %}
     # good and also fast
     html = ''
     html << '<h1>Page title</h1>'
@@ -665,21 +752,21 @@ strings.
     paragraphs.each do |paragraph|
       html << "<p>#{paragraph}</p>"
     end
-    ```
+{% endhighlight %}
 
-<a name="literals"/>
+<a name="literals"/></a>
 ## Percent Literals
 
 * Use `%w` freely.
 
-    ```Ruby
+{% highlight ruby %}
     STATES = %w(draft open closed)
-    ```
+{% endhighlight %}
 
 * Use `%()` for single-line strings which require both interpolation
   and embedded double-quotes. For multi-line strings, prefer heredocs.
 
-    ```Ruby
+{% highlight ruby %}
     # bad (no interpolation needed)
     %(<div class="text">Some text</div>)
     # should be '<div class="text">Some text</div>'
@@ -694,11 +781,11 @@ strings.
 
     # good (requires interpolation, has quotes, single line)
     %(<tr><td class="name">#{name}</td>)
-    ```
+{% endhighlight %}
 
 * Use `%r` only for regular expressions matching *more than* one '/' character.
 
-    ```Ruby
+{% highlight ruby %}
     # bad
     %r(\s+)
 
@@ -708,13 +795,13 @@ strings.
 
     # good
     %r(^/blog/2011/(.*)$)
-    ```
+{% endhighlight %}
 
 * Avoid `%q`, `%Q`, `%x`, `%s`, and `%W`.
 
 * Prefer `()` as delimiters for all `%` literals.
 
-<a name="misc"/>
+<a name="misc"/></a>
 ## Misc
 
 * Write `ruby -w` safe code.
@@ -725,7 +812,7 @@ strings.
 * If you really have to, add "global" methods to Kernel and make them private.
 * Use class instance variables instead of global variables.
 
-    ```Ruby
+{% highlight ruby %}
     #bad
     $foo_bar = 1
 
@@ -737,7 +824,7 @@ strings.
     end
 
     Foo.bar = 1
-    ```
+{% endhighlight %}
 
 * Avoid `alias` when `alias_method` will do.
 * Use `OptionParser` for parsing complex command line options and
@@ -747,13 +834,13 @@ strings.
     * Use the new lambda syntax.
     * Methods like `inject` now accept method names as arguments.
 
-      ```Ruby
+  {% highlight ruby %}
       [1, 2, 3].inject(:+)
-      ```
+  {% endhighlight %}
 
 * Avoid needless metaprogramming.
 
-<a name="design"/>
+<a name="design"/></a>
 ## Design
 
 * Code in a functional way, avoiding mutation when that makes sense.
@@ -773,7 +860,7 @@ strings.
 * Be consistent. In an ideal world, be consistent with these guidelines.
 * Use common sense.
 
-<a name="contributing"/>
+<a name="contributing"/></a>
 # Contributing
 
 Nothing written in this guide is set in stone. It's my desire to work
@@ -784,7 +871,7 @@ community.
 Feel free to open tickets or send pull requests with improvements. Thanks in
 advance for your help!
 
-<a name="spreadtheword"/>
+<a name="spreadtheword"/></a>
 # Spread the Word
 
 A community-driven style guide is of little use to a community that
@@ -794,10 +881,8 @@ get makes the guide just a little bit better. And we want to have the
 best possible guide, don't we?
 
 
-
-
   [0]: http://www.python.org/dev/peps/pep-0008/
   [1]: https://github.com/bbatsov/rails-style-guide
   [2]: http://pragprog.com/book/ruby3/programming-ruby-1-9
   [3]: http://www.amazon.com/Ruby-Programming-Language-David-Flanagan/dp/0596516177
-  [4]: https://github.com/TechnoGate/transmuter
+  [5]: http://localhost:4000/2011/12/10/ruby-style-guide/
