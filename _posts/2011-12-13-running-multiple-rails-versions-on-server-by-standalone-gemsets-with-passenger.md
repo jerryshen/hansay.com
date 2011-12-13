@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Running Multiple Rails Versions with Phusion Passenger
+title: Running Multiple Rails Versions by Standalone Gemsets with Passenger
 categories:
 - deploy
 - RVM
