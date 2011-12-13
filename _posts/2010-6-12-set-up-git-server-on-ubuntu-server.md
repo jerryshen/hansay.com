@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Distributed Revision Control with Git
+title: Set up Git Server on Ubuntu Server
 categories:
 - git
 ---
