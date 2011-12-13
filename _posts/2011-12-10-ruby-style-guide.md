@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Ruby 代码规范
+title: Ruby Style Guide
 categories:
 - ruby
 ---

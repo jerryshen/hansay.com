@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Rails 代码规范
+title: Rails Style Guide
 categories:
 - rails
 ---
