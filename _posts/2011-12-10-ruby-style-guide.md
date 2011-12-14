@@ -188,7 +188,7 @@ You can generate a PDF or an HTML copy of this guide using
 * Keep lines fewer than 80 characters.
 * Avoid trailing whitespace.
 
-<a name="syntax"/></a>
+<a name="syntax"></a>
 ## Syntax
 
 * Use `def` with parentheses when there are arguments. Omit the
@@ -500,7 +500,7 @@ would happen if the current value happened to be `false`.)
 * Always run the Ruby interpreter with the `-w` option so it will warn
   you if you forget either of the rules above!
 
-<a name="naming"/></a>
+<a name="naming"></a>
 ## Naming
 
 > The only real difficulties in programming are cache invalidation and
@@ -530,7 +530,7 @@ would happen if the current value happened to be `false`.)
   *find_all*, `size` over *length*. This is not a hard requirement; if the
   use of the alias enhances readability, it's ok to use it.
 
-<a name="comments"/></a>
+<a name="comments"></a>
 ## Comments
 
 > Good code is its own best documentation. As you're about to add a
@@ -595,7 +595,7 @@ would happen if the current value happened to be `false`.)
 * Use other custom annotation keywords if it feels appropriate, but be
   sure to document them in your project's `README` or similar.
 
-<a name="classes"/>
+<a name="classes"></a>
 ## Classes
 
 * Always supply a proper `to_s` method.
@@ -671,14 +671,14 @@ in *Ruby* now, not in *Python*.
     end
 {% endhighlight %}
 
-<a name="exceptions"/></a>
+<a name="exceptions"></a>
 ## Exceptions
 
 * Don't suppress exceptions.
 * Don't use exceptions for flow of control.
 * Avoid rescuing the `Exception` class.
 
-<a name="collections"/></a>
+<a name="collections"></a>
 ## Collections
 
 * It's ok to use arrays as sets for a small number of elements.
@@ -692,7 +692,7 @@ strings.
 * Rely on the fact that hashes in 1.9 are ordered.
 * Never modify a collection while traversing it.
 
-<a name="strings"/>
+<a name="strings"></a>
 ## Strings
 
 * Prefer string interpolation instead of string concatenation:
