@@ -178,7 +178,7 @@ If we make a breaking change to our code, for example remove a method in your us
 
 #### Machinist
 
-Machinist is awesome plugin which make it easy to create objects for use in tests, It generates data for the attributes you don't care about, and constructs any necessary associated objects, leaving you to specify only the fields you care about in your test.
+Machinist is an awesome plugin which make it easy to create objects for use in tests, It generates data for the attributes you don't care about, and constructs any necessary associated objects, leaving you to specify only the fields you care about in your test.
 
 ##### Configuration
 
