@@ -97,7 +97,7 @@ in the `reset_password_keys`
 
 {% highlight ruby %}
     
-    config/initializers/devise.rb
+    # config/initializers/devise.rb
     config.reset_password_keys = [:login]
 
 {% endhighlight %}
