@@ -20,7 +20,7 @@ Then we can start, you should modify the User model and add username to attr_acc
 {% highlight ruby %}
 
     attr_accessible :username
-    
+
 {% endhighlight %}
 
 To support both username and email, you should create a login virtual attribute in Users and set the accessible
