@@ -51,7 +51,7 @@ categories:
 
 安装必要的packages 
 
-    $  sudo apt-get install bison build-essential zlib1g zlib1g-dev libssl-dev lib64readline-gplv2-dev libxml2-dev libxslt1-dev autoconf  
+    $  sudo apt-get install bison build-essential zlib1g zlib1g-dev libssl-dev libreadline-gplv2-dev libxml2-dev libxslt1-dev autoconf  
 
 安装完以上的packages后, 正式用rvm编译ruby 1.9.3, rvm会将ruby自动编译到当前用户目录的 `~/.rvm` 下(非root用户). 
 
