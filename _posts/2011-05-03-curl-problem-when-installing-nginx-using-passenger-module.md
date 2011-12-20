@@ -3,6 +3,7 @@ layout: post
 title: Curl Problem when Installing Nginx Using Passenger Module
 categories:
 - nginx
+- linux
 ---
 
 I often got this kind of problem when installing nginx using passenger module,

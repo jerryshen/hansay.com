@@ -6,6 +6,7 @@ categories:
 - RVM
 - nginx
 - passenger
+- linux
 ---
 
 **服务器系统:**   ubuntu server 11.10 64bit  
