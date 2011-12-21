@@ -7,6 +7,8 @@ categories:
 
 Method missing allows access to the object attributes, which are held in the @attributes hash, as though they were first-class methods.
 
+If you call a method that doesn’t exist, Ruby will call the method_missing method, and pass the name of the method and any arguments you supplied, which means you can dynamically handle the method.
+
 Here we go, for example, we have a messages table:
 
 {% highlight ruby %}
