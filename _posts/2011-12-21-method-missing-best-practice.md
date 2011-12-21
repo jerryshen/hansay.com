@@ -76,4 +76,4 @@ Wow, this makes your code ugly, we can use `method missing` instead of these all
 
 {% endhighlight %}
 
-When you call `is_[string]` method or `mark_as_[string]` method, as you can see, there is definitely no `is_[string]` or `mark_as_[string]` method, yet Rails is smart enough to call the method with the correct parameters, What we have done is to run a regular expression against the name of the method, and if it matches the pattern `is_[string]` or `mark_as_[string]` then it calls the method with the [string] part as the first parameter and the first argument as the second parameter. Pretty powerful, don’t you think?
+When you call `is_[string]` method or `mark_as_[string]` method, as you can see, there is definitely no `is_[string]` or `mark_as_[string]` method, yet Rails is smart enough to call the method with the correct parameters, What we have done is to run a regular expression against the name of the method, and if it matches the pattern `is_[string]` or `mark_as_[string]` then it calls the method with the [string] part as the first parameter and the first argument as the second parameter. Pretty powerful, don't you think?
