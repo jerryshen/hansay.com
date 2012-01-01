@@ -2,7 +2,7 @@
 layout: post
 title: Using Nested Form with Simple Form
 categories:
-- Rais Plugins
+- Rails Plugins
 ---
 
 I would like to introduce you guys a Rails gem for conveniently manage multiple nested models in a single form.
