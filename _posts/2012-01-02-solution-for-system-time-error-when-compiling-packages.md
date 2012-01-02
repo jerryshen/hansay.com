@@ -12,8 +12,8 @@ This is the error information,
     configure: error: newly created file is older than distributed files!
     Check your system clock
     
-It seems that the file I created is lolder that the distributed files, then I check the system clock,
-I found the timezone was wrong, so I reset the timezone with:
+It seems that the file I created is older than the distributed files, then I checked the system clock,
+I found the timezone was wrong, so I reseted the timezone with:
 
     sudo dpkg-reconfigure tzdata
     
