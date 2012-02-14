@@ -22,7 +22,7 @@ APN Sender is based on Resque and Redis, so I wrote a script to skip the Resque 
 
     notification = APN::Notification.new(token, { :alert => 'Hey, how are you?', :sound => true, :badge => 9 })
 
-    sender = APN::Sender.new(verbose: true, environment: 'production')
+    sender = APN::Sender.new(:verbose => true, :environment => 'production')
     sender.send_to_apple(notification)
 
 {% endhighlight %}
