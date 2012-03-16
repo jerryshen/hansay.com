@@ -31,7 +31,7 @@ Create `config/setup_load_paths.rb` file in config directory, prefill with:
         rvm_lib_path = File.join(rvm_path, 'lib')
         $LOAD_PATH.unshift rvm_lib_path
         require 'rvm'
-        RVM.gemset_use! 'foo'
+        RVM.use_from_path! File.dirname(File.dirname(__FILE__))
       rescue LoadError
         # RVM is unavailable at this point.
         raise "RVM ruby lib is currently unavailable."
@@ -97,6 +97,13 @@ Here is the deploy script:
     set :use_sudo, false
     server "your_server_domain_or_ip_here", :app, :web, :db, :primary => true
     set :deploy_via, :copy
+    
+    role :web, "your_server_domain_or_ip_here"                          # Your HTTP server, Apache/etc
+    role :app, "your_server_domain_or_ip_here"                          # This may be the same as your `Web` server
+    role :db,  "your_server_domain_or_ip_here", :primary => true        # This is where Rails migrations will run
+    role :db,  "your_server_domain_or_ip_here"
+    
+    set :keep_releases, 3
 
     task :configure, :roles => :web do
       run "ln -s #{shared_path}/config/database.yml #{current_release}/config/database.yml"
@@ -107,8 +114,20 @@ Here is the deploy script:
       run "rvm rvmrc trust #{current_release}"
     end
 
+    task :precompile, :roles => :web do
+      run "cd #{release_path}; RAILS_ENV=production bundle exec rake assets:precompile"
+    end
+    
+    namespace :deploy do
+      task :restart do
+        run "touch #{current_path}/tmp/restart.txt"
+      end
+    end
+
     after "deploy:update_code", :trust_rvmrc
     after 'deploy:update_code', :configure
+    after "deploy:update_code", :precompile
+    after 'deploy:restart',     'deploy:cleanup'
     
 {% endhighlight %}
     
