@@ -36,7 +36,7 @@ categories:
 
 然后安装rvm 
 
-    $  bash < <(curl -s https://rvm.beginrescueend.com/install/rvm)
+    $ bash -s stable < <(curl -s https://raw.github.com/wayneeseguin/rvm/master/binscripts/rvm-installer)
 
 在 `~/.bashrc` 中设置RVM的环境变量 
 
@@ -60,7 +60,7 @@ categories:
 
 安装完ruby 1.9.3后, 我们可以把rvm ruby 1.9.3设置为默认
 
-    $  rvm --default ruby-1.9.3-p0
+    $  rvm --default ruby-1.9.3-p125
 
 接下来就可以查看ruby 版本了
 
@@ -128,12 +128,12 @@ ruby1.9.3安装好之后, 会自动带一个空的gemset, 切换到该gemset下�
 下载最新的stable version nginx
 
     $  mkdir -p /home/jerry/opt/src && cd /home/jerry/opt/src
-    $  wget http://nginx.org/download/nginx-1.0.10.tar.gz
-    $  tar xvf nginx-1.0.10.tar.gz
+    $  wget http://nginx.org/download/nginx-1.0.13.tar.gz
+    $  tar xvf nginx-1.0.13.tar.gz
 
 安装编译相关类库
 
-    $  sudo apt-get install libpcre3-dev  
+    $  sudo apt-get install libpcre3-dev libcurl4-openssl-dev
 
 编译安装带有 passenger 模块的nginx  
 
@@ -141,7 +141,7 @@ ruby1.9.3安装好之后, 会自动带一个空的gemset, 切换到该gemset下�
 
 选择 `2. No: I want to customize my Nginx installation. (for advanced users)`
 
-输入 `src: /home/jerry/opt/src/nginx-1.0.10` 和 `prefix: /home/jerry/opt/nginx`
+输入 `src: /home/jerry/opt/src/nginx-1.0.13` 和 `prefix: /home/jerry/opt/nginx`
 
 添加编译参数并编译
 
@@ -151,7 +151,7 @@ ruby1.9.3安装好之后, 会自动带一个空的gemset, 切换到该gemset下�
 
 另外如果不想使用passenger自带脚本编译nginx, 也可以手工编译nginx时加入以下参数, 来启动passenger模块     
 
-    --add-module='/home/jerry//opt/passenger/ext/nginx 
+    --add-module='/home/jerry/opt/passenger/ext/nginx 
 
 **配置 nginx**
 
@@ -194,8 +194,8 @@ ruby1.9.3安装好之后, 会自动带一个空的gemset, 切换到该gemset下�
 
 添加 Passneger 模块配置, 编辑 `/home/jerry/opt/etc/nginx/conf.d/passenger.conf`
 
-    passenger_root /home/jerry/.rvm/gems/ruby-1.9.3-p0/gems/passenger-3.0.11;
-    passenger_ruby /home/jerry/.rvm/bin/ruby-1.9.3-p0;
+    passenger_root /home/jerry/.rvm/gems/ruby-1.9.3-p125/gems/passenger-3.0.11;
+    passenger_ruby /home/jerry/.rvm/bin/ruby-1.9.3-p125;
 
 将nginx的server配置链接到sites-enabled下
 
@@ -231,7 +231,7 @@ ruby1.9.3安装好之后, 会自动带一个空的gemset, 切换到该gemset下�
     # Description:       starts nginx using start-stop-daemon
     ### END INIT INFO
     
-    # PATH=/home/jerry/.rvm/gems/ruby-1.9.3-p0/bin:/bin:/home/jerry/.rvm/rubies/ruby-1.9.3-p0/bin:/home/jerry/.rvm/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
+    # PATH=/home/jerry/.rvm/gems/ruby-1.9.3-p125/bin:/bin:/home/jerry/.rvm/rubies/ruby-1.9.3-p125/bin:/home/jerry/.rvm/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
     DAEMON=/home/jerry/opt/nginx/sbin/nginx
     NAME=nginx
     DESC=nginx
